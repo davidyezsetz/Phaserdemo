@@ -16,7 +16,7 @@ Preload.prototype = {
     this.load.image('background', 'assets/background.png');
     this.load.image('ground', 'assets/ground.png');
     this.load.image('title', 'assets/title.png');
-    this.load.image('startButton', 'start-button/title.png');
+    this.load.image('startButton', 'assets/start-button.png');
 
     this.load.spritesheet('bird', 'assets/bird.png', 34, 24, 3);
 
