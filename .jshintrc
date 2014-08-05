@@ -1,24 +1,21 @@
 {
+  "node": true,
+  "esnext": true,
   "bitwise": true,
-  "laxcomma": true,
   "camelcase": true,
   "curly": true,
   "eqeqeq": true,
-  "forin": true,
   "immed": true,
+  "indent": 2,
   "latedef": true,
   "newcap": true,
   "noarg": true,
-  "nonew": false,
   "quotmark": "single",
+  "regexp": true,
   "undef": true,
   "unused": true,
-  "devel": true,
+  "strict": true,
   "trailing": true,
-  "browser": true,
-  "sub": true,
-  "debug": true,
-  "globals": {
-    "Phaser": false
-  }
+  "smarttabs": true,
+  "white": true
 }
