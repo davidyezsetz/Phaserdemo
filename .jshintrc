@@ -17,5 +17,8 @@
   "strict": true,
   "trailing": true,
   "smarttabs": true,
-  "white": false
+  "white": false,
+  "globals": {
+    "Phaser": true
+  }
 }
