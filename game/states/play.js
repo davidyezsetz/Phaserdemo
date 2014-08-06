@@ -18,6 +18,9 @@ Play.prototype = {
     // and add it to the game
     this.game.add.existing(this.bird);
 
+    // create a group to hold the pipes
+    this.pipes = this.game.add.group();
+
     // create and a new ground object
     this.ground = new Ground(this.game, 0, 400, 335, 112);
     this.game.add.existing(this.ground);
@@ -40,15 +43,35 @@ Play.prototype = {
   },
 
   update: function() {
-    this.game.physics.arcade.collide(this.bird, this.ground);
+    // collide with the ground
+    this.game.physics.arcade.collide(this.bird, this.ground, this.deathHandler, null, this);
+    // cycle through each group of pipes to check collision
+    this.pipes.forEach(function(pipeGroup) {
 
+      this.game.physics.arcade.collide(this.bird, pipeGroup, this.deathHandler, null, this);
+    }, this);
+  },
+  deathHandler: function() {
+    this.game.state.start('gameover');
   },
   generatePipes: function() {
     var pipeY = this.game.rnd.integerInRange(-100, 100);
-    var pipeGroup = new PipeGroup(this.game);
+    var pipeGroup = this.pipes.getFirstExists(false);
     
-    pipeGroup.x = this.game.width;
-    pipeGroup.y = pipeY;
+    if (!pipeGroup) {
+      pipeGroup = new PipeGroup(this.game, this.pipes);
+    }
+
+    pipeGroup.reset(this.game.width, pipeY);
+  },
+  // called when we leave the game
+  shutdown: function() {
+    // remove binding of the key otherwise on a new game
+    // it would still be bound the last instance of the game
+    this.game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);
+    // release memory
+    this.bird.destroy();
+    this.pipes.destroy();
   }
 };
 
